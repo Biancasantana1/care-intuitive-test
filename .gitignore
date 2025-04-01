@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+.eggs/
+*.pyd
+*.whl
+*.manifest
+*.spec
+
+# Distribuição / Build
+build/
+develop-eggs/
+dist/
+sdist/
+eggs/
+.parts/
+wheels/
+pip-wheel-metadata/
+*.egg-info/
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs
+*.log
+*.out
+*.err
+
+# Configurações de IDEs/Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints
+
+# Arquivos de lock (opcional, se quiser evitar que sejam versionados)
+poetry.lock
+Pipfile.lock
+
+# Se você tiver arquivos de ambiente com segredos
+.env
+.env.*
+
+# Se existirem binários ou libs geradas
+*.dll
+*.dylib
+*.exe
+*.lib
+*.so
+
+# Outros exemplos de arquivos temporários
+*.bak
+*.temp
+*.tmp
