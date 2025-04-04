@@ -10,7 +10,7 @@ def fix_text(text):
 def load_operators(path=None):
     if path is None:
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.normpath(os.path.join(current_dir, '..', '..', 'data', 'Relatorio_cadop.csv'))
+        path = os.path.normpath(os.path.join(current_dir, '..', '..', 'data', 'operadores_csv', 'Relatorio_cadop.csv'))
     operators = []
     with open(path, encoding="latin1") as f:
         reader = csv.DictReader(f, delimiter=";")

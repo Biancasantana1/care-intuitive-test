@@ -9,7 +9,7 @@ def download_and_zip_attachments():
     soup = BeautifulSoup(response.content, "html.parser")
     links = soup.find_all('a', href=True)
 
-    os.makedirs("data", exist_ok=True)
+    os.makedirs("data/scraping", exist_ok=True)
     files = []
 
     for link in links:
@@ -19,7 +19,7 @@ def download_and_zip_attachments():
         if ("Anexo I" in text and href.endswith(".pdf")) or ("Anexo II" in text and href.endswith(".pdf")):
             final_url = href if href.startswith("http") else f"https://www.gov.br{href}"
             filename = final_url.split("/")[-1]
-            path = f"data/{filename}"
+            path = f"data/scraping/{filename}"
             try:
                 with requests.get(final_url, stream=True) as r:
                     with open(path, 'wb') as f:
@@ -31,6 +31,6 @@ def download_and_zip_attachments():
     if not files:
         return None
 
-    zip_path = "data/anexos_ans.zip"
+    zip_path = "data/scraping/anexos_ans.zip"
     zip_files(files, zip_path)
     return os.path.abspath(zip_path)
