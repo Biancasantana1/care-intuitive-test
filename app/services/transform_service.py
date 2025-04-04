@@ -5,6 +5,18 @@ from app.core.csv_utils import save_csv_with_replacements
 from app.core.zip_utils import zip_files
 
 def process_pdf_attachment():
+    """
+    Processa o PDF do Anexo I da ANS, extrai as tabelas e gera um CSV transformado,
+    substituindo siglas por descrições legíveis. Em seguida, compacta o CSV em um arquivo ZIP.
+
+    - Localiza o PDF em `data/scraping/`.
+    - Extrai as tabelas com `pdfplumber`.
+    - Salva o CSV em `data/transform/` com nome padrão `Teste_Bianca.csv`.
+    - Aplica substituições como 'OD' → 'Odontológico' e 'AMB' → 'Ambulatorial'.
+    - Gera um ZIP com o CSV transformado.
+
+    Retorna o caminho absoluto do arquivo ZIP.
+    """
     os.makedirs("data/transform", exist_ok=True)
     pdf_path = 'data/scraping/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf'
     base_name = f'Teste_Bianca'

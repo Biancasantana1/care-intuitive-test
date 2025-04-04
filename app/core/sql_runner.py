@@ -13,6 +13,14 @@ load_dotenv()
 
 
 def run_sql_file(sql_path: str, replacements: dict = None):
+    """
+    Executa um arquivo SQL, com suporte a múltiplos comandos e substituições dinâmicas por parâmetros.
+
+    - Lê o conteúdo SQL de um arquivo.
+    - Aplica substituições em parâmetros no formato `:param`.
+    - Executa comandos múltiplos (`multi=True`).
+    - Retorna os resultados de comandos com `SELECT`, ou mensagens de erro.
+    """
     try:
         sql = Path(sql_path).read_text(encoding='utf-8')
         logging.debug(f"SQL original: {sql}")
@@ -68,10 +76,16 @@ def run_sql_file(sql_path: str, replacements: dict = None):
         return {"error": error_msg}
 
 
-def run_select_sql_file(sql: str) -> list[tuple[Decimal | bytes | date | datetime | float | int | set[
-    str] | str | timedelta | None | time, ...] | dict[str, Decimal | bytes | date | datetime | float | int | set[
-    str] | str | timedelta | None | time]] | dict[str, str] | dict[str, str]:
+def run_select_sql_file(sql: str) -> list[
+    tuple[Decimal | bytes | date | datetime | float | int | set[str] | str | timedelta | None | time, ...]
+] | dict[str, str]:
+    """
+    Executa uma query SQL do tipo SELECT e retorna os resultados como lista de tuplas.
 
+    - Aceita comandos simples de leitura.
+    - Retorna os registros ou erro formatado.
+    - Ideal para visualização de resultados em tempo real ou APIs de consulta.
+    """
     try:
         db_config = {
             "host": os.getenv("DB_HOST", "localhost"),

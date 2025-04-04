@@ -2,6 +2,14 @@ import pdfplumber
 import pandas as pd
 
 def extract_pdf_table(pdf_path: str) -> pd.DataFrame:
+    """
+      Extrai todas as tabelas de um PDF e retorna como um DataFrame formatado.
+
+      - Remove quebras de linha nas células.
+      - Define a primeira linha encontrada como cabeçalho.
+      - Remove linhas totalmente vazias e duplicações do cabeçalho.
+      - Retorna um DataFrame limpo, com índices resetados.
+      """
     data = []
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:

@@ -3,7 +3,19 @@ import requests
 from bs4 import BeautifulSoup
 from app.core.zip_utils import zip_files
 
+
 def download_and_zip_attachments():
+    """
+    Realiza o scraping da página da ANS, baixa os PDFs dos anexos "Anexo I" e "Anexo II"
+    e gera um arquivo ZIP contendo os documentos localmente.
+
+    - Acessa a URL oficial da ANS via HTTP.
+    - Identifica links para os PDFs "Anexo I" e "Anexo II".
+    - Baixa os arquivos e os salva na pasta `data/scraping`.
+    - Gera um arquivo `anexos_ans.zip` com os PDFs baixados.
+
+    Retorna o caminho absoluto do arquivo ZIP gerado, ou `None` se nenhum anexo for encontrado.
+    """
     url = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")

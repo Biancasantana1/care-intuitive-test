@@ -1,6 +1,10 @@
 import pandas as pd
 
 def save_csv_with_replacements(df: pd.DataFrame, csv_path: str):
+    """
+    Salva um DataFrame como CSV, substituindo as siglas 'OD' e 'AMB' por
+    suas descrições completas em todas as colunas textuais.
+    """
     replacements = {
         'OD': 'Odontológico',
         'AMB': 'Ambulatorial'
