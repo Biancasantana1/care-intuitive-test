@@ -7,12 +7,21 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
+      # Executa o script de inicialização no primeiro start
       - ./sql/initialize/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Monta os diretórios para os CSVs (caso sejam utilizados)
       - ./data/operadores_csv:/var/lib/mysql-files/operadores_csv
       - ./data/demonstrativos_csv:/var/lib/mysql-files/demonstrativos_csv
+    command: --lower-case-table-names --secure-file-priv=""
+    networks:
+      - local-network
 
-    command: --secure-file-priv=""
+networks:
+  local-network:
